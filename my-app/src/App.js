@@ -1,24 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
 function App() {
+  const strikes = useState(0);
+  const balls = useState(0);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="balls">
+        <h1>Balls</h1>
+        <span className="box">{balls}</span>
+      </div>
+      <div className="strikes"> 
+        <h1>Strikes</h1>
+        <span className="box">{strikes}</span>
+      </div>
+      <button className="hit">Hit</button>
+      <button className="foul">Foul</button>
     </div>
   );
 }
