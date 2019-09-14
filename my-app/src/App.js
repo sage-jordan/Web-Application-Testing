@@ -12,24 +12,14 @@ class App extends React.Component {
     console.log("constructor");
   };
 
-  useEffect(() => {
-    if(strikes === 0){
-      setState({
+  componentDidUpdate() {
+    if (this.state.strikes == 3) {
+      this.setState({
         strikes: 0,
         balls: 0
-      });
-    };
-  }, [strikes]);
-
-  // componentDidMount() {
-  //   const hit = document.querySelector('.hit');
-  //   const foul = document.querySelector('.foul');
-  //   console.log("component did mount", hit, foul);
-
-  //   hit.addEventListener(() => {
-  //     this.state.
-  //   })
-  // };
+      })
+    }
+  }
 
   render() {
     console.log("app render");
