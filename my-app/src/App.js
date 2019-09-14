@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
+import Dashboard from './Dashboard';
 
 class App extends React.Component {
   constructor(props){
@@ -9,13 +10,26 @@ class App extends React.Component {
       balls: 0
     };
     console.log("constructor");
-  }
-
-  componentDidMount() {
-    const hit = document.querySelector('.hit');
-    const foul = document.querySelector('.foul');
-    console.log("component did mount", hit, foul);
   };
+
+  useEffect(() => {
+    if(strikes === 0){
+      setState({
+        strikes: 0,
+        balls: 0
+      });
+    };
+  }, [strikes]);
+
+  // componentDidMount() {
+  //   const hit = document.querySelector('.hit');
+  //   const foul = document.querySelector('.foul');
+  //   console.log("component did mount", hit, foul);
+
+  //   hit.addEventListener(() => {
+  //     this.state.
+  //   })
+  // };
 
   render() {
     console.log("app render");
@@ -29,10 +43,9 @@ class App extends React.Component {
           <h1>Strikes</h1>
           <span className="box">{this.state.strikes}</span>
         </div>
-        <button className="hit">Hit</button>
-        <button className="foul">Foul</button>
+        <Dashboard />
       </div>
   )}; 
-}
+};
 
 export default App;
