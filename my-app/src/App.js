@@ -13,7 +13,7 @@ class App extends React.Component {
   };
 
   componentDidUpdate() {
-    if (this.state.strikes == 3) {
+    if (this.state.strikes == 3 || this.state.balls === 4) {
       this.setState({
         strikes: 0,
         balls: 0
