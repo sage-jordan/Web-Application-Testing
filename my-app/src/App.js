@@ -7,16 +7,22 @@ class App extends React.Component {
     super(props);
     this.state = {
       strikes: 0,
-      balls: 0
+      balls: 0,
+      foul: false
     };
     console.log("constructor");
   };
 
+  componentDidMount() {
+    const [values, setValues] = useLocalStorage(key, this.state || {});
+  }
+
   componentDidUpdate() {
-    if (this.state.strikes == 3 || this.state.balls === 4 || hit) {
+    if (this.state.strikes == 3 || this.state.balls === 4) {
       this.setState({
         strikes: 0,
-        balls: 0
+        balls: 0,
+        foul: false
       })
     }
     if(foul && strikes <= 2){
@@ -36,7 +42,7 @@ class App extends React.Component {
           <h1>Strikes</h1>
           <span className="box">{this.state.strikes}</span>
         </div>
-        <Dashboard />
+        <Dashboard values={values} setValues={setValues}/>
       </div>
   )}; 
 };
