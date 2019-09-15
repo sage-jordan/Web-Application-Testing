@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 
-class Dashboard extends Component {
+class Dashboard extends Component (){
   constructor(props){
     super(props);
     console.log(props);
