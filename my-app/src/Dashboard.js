@@ -7,16 +7,33 @@ class Dashboard extends Component {
     console.log(props);
     this.state = {
     };
+    const values = props.values[0][0];
+    console.log(values);
+    return [values, props.setValues];
   }
-  render() {
+
+  componentDidUpdate(values) {
+    if (values.strikes == 3 || values.balls === 4) {
+      this.setState({
+        strikes: 0,
+        balls: 0,
+        foul: false
+      })
+    }
+    if(values.foul && values.strikes <= 2){
+      this.state.strikes += 1;
+    }
+  }
+
+  render(values, props) {
     console.log("dash render");
     return (
       <div className="dashboard">
         <h1>Dashboard</h1>
-        <button className="strike" onClick={() => this.props.setValues += 1}>Strike</button>
-        <button className="ball"onClick={() => this.state.balls += 1}>Ball</button>
-        <button className="hit" onClick={() => this.setState({strikes: 0, balls:0})}>Hit</button>
-        <button className="foul"onClick={() => this.setState({...this.state, foul: true})}>Foul</button>
+        <button className="strike" onClick={() => values.strikes += 1}>Strike</button>
+        <button className="ball"onClick={() => values.balls += 1}>Ball</button>
+        <button className="hit" onClick={() => props.setValues({strikes: 0, balls:0})}>Hit</button>
+        <button className="foul"onClick={() => props.setValues({...this.state, foul: true})}>Foul</button>
       </div>
   )}; 
 }

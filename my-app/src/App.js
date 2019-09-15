@@ -1,50 +1,31 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './App.css';
+import { useState } from 'react';
 import Dashboard from './Dashboard';
+import { useLocalStorage } from './useLocalStorage';
 
-class App extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      strikes: 0,
-      balls: 0,
-      foul: false
-    };
-    console.log("constructor");
-  };
+function App () {
+  const state = useState({
+    strikes: 0,
+    balls: 0,
+    foul: false
+  });
+  const [values, setValues] = useState(useLocalStorage(1, state || {}));
 
-  componentDidMount() {
-    const [values, setValues] = useLocalStorage(key, this.state || {});
-  }
-
-  componentDidUpdate() {
-    if (this.state.strikes == 3 || this.state.balls === 4) {
-      this.setState({
-        strikes: 0,
-        balls: 0,
-        foul: false
-      })
-    }
-    if(foul && strikes <= 2){
-      this.state.strikes += 1;
-    }
-  }
-
-  render() {
-    console.log("app render");
-    return (
-      <div className="App">
-        <div className="balls">
-          <h1>Balls</h1>
-          <span className="box">{this.state.balls}</span>
-        </div>
-        <div className="strikes"> 
-          <h1>Strikes</h1>
-          <span className="box">{this.state.strikes}</span>
-        </div>
-        <Dashboard values={values} setValues={setValues}/>
+  
+  return (
+    <div className="App">
+      <div className="balls">
+        <h1>Balls</h1>
+        <span className="box">{values.balls}</span>
       </div>
-  )}; 
+      <div className="strikes"> 
+        <h1>Strikes</h1>
+        <span className="box">{values.strikes}</span>
+      </div>
+      <Dashboard values={values} setValues={setValues}/>
+    </div>
+  ); 
 };
 
 export default App;
